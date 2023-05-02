@@ -1,4 +1,5 @@
 import pygame, settings, ball_math
+import random
 
 class Ball:
 
@@ -19,12 +20,9 @@ class Ball:
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
-    def animate_ball_falling(self, to_y):
-        fall_rate = settings.ball_fall_rate / 10
-
-        for x in range(10):
-            self.y = self.y + to_y / 10
-            # pygame.time.wait(ball_math.convert_float_to_int(fall_rate))
+    def hit(self):
+        self.x = random.randint(-6, 6) * 100
+        self.y = random.randint(-6, 6) * 100
 
     def update(self):
 
@@ -33,6 +31,14 @@ class Ball:
             self.rect.x = self.x
         else:
             self.rect.x = self.spawn_x
+
+    def reset(self):
+        self.posx = 0
+        self.posy = 600
+        self.xFac, self.yFac = 1, -1
+  
+    # Used to change the direction along Y axis
+
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)

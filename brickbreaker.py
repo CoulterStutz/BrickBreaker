@@ -27,7 +27,6 @@ class BrickBreaker:
     def run_game(self):
 
         self.generate_bricks()
-        self.ball.animate_ball_falling(800)
 
         while True:
             self.check_events()
@@ -51,11 +50,24 @@ class BrickBreaker:
                     self.player.moving_right = True
                 elif event.key == pygame.K_LEFT:
                     self.player.moving_left = True
+                elif event.key == pygame.K_0:
+                    self.ball.hit()
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT:
                     self.player.moving_right = False
                 elif event.key == pygame.K_LEFT:
                     self.player.moving_left = False
+        
+        point_player_x = self.player.x
+        point_ball_x = self.ball.x
+        point_ball_y = self.ball.y
+
+        if point_player_x - point_ball_x <= settings.player_hitpoint and point_player_x - point_ball_x >= settings.player_hitpoint * -1:
+            # do collide stuff
+            None
+        else:
+            None
+
 
     def generate_bricks(self):
         bricks = '\n'.join(settings.level).split()
